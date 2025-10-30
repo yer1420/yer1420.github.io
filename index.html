@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Your Name — Portfolio</title>
+  <title>Yahya EL MORHDER — Portfolio</title>
   <meta name="description" content="Yahya EL MORHDER — UI engineer, designer, and developer. I build accessible, performant web experiences." />
   <meta property="og:title" content="Yahya EL MORHDER — Portfolio" />
   <meta property="og:description" content="Numeric sciences student, soon to be engineer. I learn about making, performant web experiences." />
@@ -12,163 +12,168 @@
   <!-- Simple data-URI favicon (customize if you want a file) -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23111827'/%3E%3Ctext x='50' y='58' font-size='52' text-anchor='middle' fill='%23fff' font-family='Arial'%3EYN%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css" />
+  
 </head>
 <body>
-  <header class="site-header" id="top">
-    <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="Home">Yahya EL MORHDER</a>
+    <section class ="wrapper">
+    
+    <div id="stars1"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+    </section>
+    <header class="site-header" id="top">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="Home">Yahya EL MORHDER</a>
 
-      <nav class="nav" id="nav" aria-label="Main Navigation">
-        <ul class="nav-list">
-		  <li><a href="#projects">Projects</a></li>
-		  <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+        <nav class="nav" id="nav" aria-label="Main Navigation">
+          <ul class="nav-list">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
 
-      <div class="header-actions">
-        <button class="btn ghost" id="theme-toggle" aria-pressed="false" title="Toggle dark mode">🌙</button>
-        <button class="btn primary mobile-toggle" id="mobile-toggle" aria-expanded="false" aria-controls="nav" aria-label="Toggle navigation">☰</button>
+        <div class="header-actions">
+          <button class="btn ghost" id="theme-toggle" aria-pressed="false" title="Toggle dark mode">🌙</button>
+          <button class="btn primary mobile-toggle" id="mobile-toggle" aria-expanded="false" aria-controls="nav" aria-label="Toggle navigation">☰</button>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-inner">
-        <div class="hero-copy">
-          <h1 class="reveal">Hi — I'm Yahya EL MORHDER.</h1>
-          <p class="lead reveal">I'm a student at the engineering school ENSEEIHT of Toulouse. I specialize in numeric sciences and program engineering, 3D design and modeling, and performance-minded implementations.</p>
-          <div class="hero-cta reveal">
-            <a class="btn primary" href="#projects">View Projects</a>
-            <a class="btn ghost" href="#contact">Contact Me</a>
+    <main>
+      <section class="hero">
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <h1 class="reveal">Hi — I'm Yahya EL MORHDER.</h1>
+            <p class="lead reveal">I'm a student at the engineering school ENSEEIHT of Toulouse. I specialize in numeric sciences and I am passionate about program engineering, 3D design and modeling.</p>
+            <div class="hero-cta reveal">
+              <a class="btn primary" href="#projects">View Projects</a>
+              <a class="btn ghost" href="#contact">Contact Me</a>
+            </div>
+            <p class="small-note reveal">Available for freelance and full-time opportunities.</p>
           </div>
-          <p class="small-note reveal">Available for freelance and full-time opportunities.</p>
+
+          <figure class="hero-art reveal" aria-hidden="true">
+            <img src="pfp.png" alt="" loading="lazy">
+          </figure>
         </div>
+      </section>
 
-        <figure class="hero-art reveal" aria-hidden="true">
-          <img src="https://images.unsplash.com/photo-1497493292307-31c376b6e479?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="" loading="lazy">
-        </figure>
-      </div>
-    </section>
+      <section id="work" class="section">
+        <div class="container">
+          <h2 class="section-title reveal">Selected Projects</h2>
+          <p class="section-sub reveal">Projects focused on interface, accessibility, and performance.</p>
 
-    <section id="work" class="section">
-      <div class="container">
-        <h2 class="section-title reveal">Selected Projects</h2>
-        <p class="section-sub reveal">Projects focused on interface, accessibility, and performance.</p>
+          <div class="projects-grid">
+            <!-- Project 1 -->
+            <article class="project-card reveal">
+              <a href="#" class="project-link" aria-label="Open Project 1">
+                <div class="project-media">
+                  <img src="detail.png" loading="lazy">
+                </div>
+                <div class="project-body">
+                  <h3 class="project-title">3D terminal graphics</h3>
+                  <p class="project-desc">A handy tool used to display 3D objects onto the terminal.</p>
+                  <p class="project-stack">C++ • Win32 API</p>
+                </div>
+              </a>
+            </article>
 
-        <div class="projects-grid">
-          <!-- Project 1 -->
-          <article class="project-card reveal">
-            <a href="#" class="project-link" aria-label="Open Project 1">
-              <div class="project-media">
-                <img src="https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Project 1 screenshot" loading="lazy">
-              </div>
-              <div class="project-body">
-                <h3 class="project-title">3D terminal graphics</h3>
-                <p class="project-desc">A handy tool used to display 3D objects onto the terminal.</p>
-                <p class="project-stack">C++ • Win32 API</p>
-              </div>
-            </a>
-          </article>
-
-          <!-- Project 2 -->
-          <article class="project-card reveal">
-            <a href="#" class="project-link" aria-label="Open Project 2">
-              <div class="project-media">
-                <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Project 2 screenshot" loading="lazy">
-              </div>
-              <div class="project-body">
-                <h3 class="project-title">Smart keys</h3>
-                <p class="project-desc">Smart keys is an alternative to macro keys. Built with a simple keypad and a few chips.</p>
-                <p class="project-stack">C •  • </p>
-              </div>
-            </a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="section alt">
-      <div class="container">
-        <h2 class="section-title reveal">About Me</h2>
-        <div class="about-grid">
-          <div class="about-text reveal">
-            <p>I’m a student and developer focused on building useful and creative tools. I love converting complex problems into delightful, accessible interfaces.</p>
-            <p>Outside work I enjoy electronics, , and music production.</p>
+            <!-- Project 2 -->
+            <article class="project-card reveal">
+              <a href="#" class="project-link" aria-label="Open Project 2">
+                <div class="project-media">
+                  <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Project 2 screenshot" loading="lazy">
+                </div>
+                <div class="project-body">
+                  <h3 class="project-title">Smart keys</h3>
+                  <p class="project-desc">Smart keys is an alternative to macro keys. Built with a simple keypad and a few chips.</p>
+                  <p class="project-stack">C •  • </p>
+                </div>
+              </a>
+            </article>
           </div>
-          <aside class="about-stats reveal" aria-hidden="false">
-            <dl>
-              <div>
-                <dt>Location</dt>
-                <dd>Toulouse, France</dd>
-              </div>
-              <div>
-                <dt>Experience</dt>
-                <dd>2+ years</dd>
-              </div>
-              <div>
-                <dt>Available</dt>
-                <dd>Yes — open to opportunities</dd>
-              </div>
-            </dl>
-          </aside>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="skills" class="section">
-      <div class="container">
-        <h2 class="section-title reveal">Skills</h2>
-        <p class="section-sub reveal">A selection of technologies I commonly use.</p>
-        <ul class="skills-list reveal" aria-label="Skills list">
-          <li>C/C++</li>
-          <li>Java</li>
-          <li>Python machine learning (Tensorflow) </li>
-		  <li>Graphics APIs (OpenGL, DirectX, Vulkan)</li>
-          <li>Embedded systems (AVRs and PICs)</li>
-          <li>Performance & Accessibility</li>
-		  
-        </ul>
-      </div>
-    </section>
+      <section id="about" class="section alt">
+        <div class="container">
+          <h2 class="section-title reveal">About Me</h2>
+          <div class="about-grid">
+            <div class="about-text reveal">
+              <p>I’m a student and developer focused on building useful and creative tools. I love converting complex problems into delightful, accessible interfaces.</p>
+              <p>Outside work I enjoy electronics, , and music production.</p>
+            </div>
+            <aside class="about-stats reveal" aria-hidden="false">
+              <dl>
+                <div>
+                  <dt>Location</dt>
+                  <dd>Toulouse, France</dd>
+                </div>
+                <div>
+                  <dt>Experience</dt>
+                  <dd>2+ years</dd>
+                </div>
+                <div>
+                  <dt>Available</dt>
+                  <dd>Yes — open to opportunities</dd>
+                </div>
+              </dl>
+            </aside>
+          </div>
+        </div>
+      </section>
 
-    <section id="contact" class="section alt">
-      <div class="container contact-grid">
-        <div class="contact-copy reveal">
-          <h2 class="section-title">Let's work together</h2>
-          <p>I'm available for freelance and full-time roles. Feel free to tell me about your project and timeline.</p>
-          <ul class="contact-meta">
-            <li>Email: <a href="yahyaelmorhder1@gmail.com">yahyaelmorhder1@gmail.com</a></li>
-            <li>Location: City, Country</li>
+      <section id="skills" class="section">
+        <div class="container">
+          <h2 class="section-title reveal">Skills</h2>
+          <p class="section-sub reveal">A selection of technologies I commonly use.</p>
+          <ul class="skills-list reveal" aria-label="Skills list">
+            <li>C/C++</li>
+            <li>Java</li>
+            <li>Python & machine learning (Tensorflow) </li>
+            <li>Graphics APIs (OpenGL, DirectX, Vulkan)</li>
+            <li>Embedded systems (AVRs and PICs)</li>
+            <li>Performance & Accessibility</li>
+        
           </ul>
         </div>
+      </section>
 
-        <form class="contact-form reveal" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-          <label for="name">Name</label>
-          <input id="name" name="name" required autocomplete="name" />
+      <section id="contact" class="section alt">
+        <div class="container contact-grid">
+          <div class="contact-copy reveal">
+            <h2 class="section-title">Let's work together</h2>
+            <p>I'm available for freelance and full-time roles. Feel free to tell me about your project and timeline.</p>
+            <ul class="contact-meta">
+              <li>Email: <a href="yahyaelmorhder1@gmail.com">yahyaelmorhder1@gmail.com</a></li>
+              <li>Location: Toulouse, France</li>
+            </ul>
+          </div>
 
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" required autocomplete="email" />
+          <form class="contact-form reveal" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <label for="name">Name</label>
+            <input id="name" name="name" required autocomplete="name" />
 
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="6" required></textarea>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required autocomplete="email" />
 
-          <button class="btn primary" type="submit">Send Message</button>
-          <p class="form-note small-note" id="form-note" aria-live="polite" hidden></p>
-        </form>
-      </div>
-    </section>
-  </main>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
 
+            <button class="btn primary" type="submit">Send Message</button>
+            <p class="form-note small-note" id="form-note" aria-live="polite" hidden></p>
+          </form>
+        </div>
+      </section>
+    </main>
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>© <span id="current-year"></span> Your Name — Built for the web.</p>
+      <p>© <span id="current-year"></span> Yahya EL MORHDER</p>
       <p class="social-links">
-        <a href="#" aria-label="GitHub">GitHub</a> •
-        <a href="#" aria-label="LinkedIn">LinkedIn</a> •
-        <a href="#" aria-label="Twitter">Twitter</a>
+        <a href="https://github.com/yer1420" aria-label="GitHub">Github</a> •
+        <a href="#" aria-label="LinkedIn">LinkedIn</a>
       </p>
     </div>
   </footer>

@@ -33,7 +33,7 @@
     localStorage.setItem(THEME_KEY, next);
     themeToggle.textContent = next === 'dark' ? '☀️' : '🌙';
   });
-
+  
   // Smooth scrolling for anchor links
   doc.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', (e) => {
