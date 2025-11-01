@@ -1,6 +1,3 @@
-
-@import "stars.css";
-
 :root{
   --bg:#f7f9fc;
   --panel:#ffffff;
@@ -27,7 +24,6 @@
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
-  z-index: 3;
   margin:0;
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   background: linear-gradient(180deg,var(--bg), color-mix(in srgb, var(--bg) 92%, #000 8%));
@@ -38,12 +34,33 @@ body{
   -webkit-tap-highlight-color: transparent;
 }
 .container{
-  z-index: 3;
+  z-index: 100;
   width:90%;
   max-width:var(--container);
   margin:0 auto;
 }
-
+.star{
+   position: absolute;
+   background: white;
+   border-radius: 50px;
+   animation: move;
+   animation-iteration-count: infinite;
+   animation-timing-function: linear;
+}
+​
+.type-1{
+   width: 1px;
+   height: 1px;
+}
+.type-2{
+   width: 2px;
+   height: 2px;
+}
+.type-3{
+   width: 3px;
+   height: 3px;
+}
+​
 /* Header */
 .site-header{
   position:sticky;
@@ -81,7 +98,7 @@ body{
 .mobile-toggle{display:none}
 
 /* Hero */
-.hero{padding:72px 0 36px}
+.hero{padding:72px 0 36px;}
 .hero-inner{display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center}
 .hero-copy h1{font-size:2.1rem;margin:0 0 12px}
 .lead{color:var(--muted);margin:0 0 18px}
@@ -153,4 +170,9 @@ a:focus, button:focus, input:focus, textarea:focus{
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce){
   .reveal, * {transition:none!important;animation:none!important}
+}
+
+@keyframes move {
+   0%{ transform: translateY(0); }
+   100%{ transform: translateY(-1000px); }
 }
