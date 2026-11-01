@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yahya EL MORHDER | Computer Science Elevator Pitch & Portfolio</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <style>
+    :root {
+      --bg-dark: #0a0f1d;
+      --bg-card: rgba(15, 23, 42, 0.75);
+      --primary-cyan: #00f2fe;
+      --secondary-blue: #4facfe;
+      --accent-glow: rgba(0, 242, 254, 0.4);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: rgba(0, 242, 254, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    #canvas-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .app-container {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    header {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--secondary-blue), var(--primary-cyan));
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #ffffff, var(--primary-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    p.subtitle {
+      color: var(--secondary-blue);
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-info a {
+      color: var(--primary-cyan);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .contact-info a:hover {
+      text-shadow: 0 0 8px var(--accent-glow);
+      transform: translateY(-2px);
+    }
+
+    /* CV Action Buttons */
+    .cv-action-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .btn-cv {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(0, 242, 254, 0.1);
+      border: 1px solid var(--primary-cyan);
+      color: var(--primary-cyan);
+      padding: 0.6rem 1.2rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-cv:hover {
+      background: var(--primary-cyan);
+      color: #040914;
+      box-shadow: 0 0 15px var(--accent-glow);
+      transform: translateY(-2px);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.75rem 1.5rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-btn.active, .nav-btn:hover {
+      background: linear-gradient(135deg, var(--secondary-blue), var(--primary-cyan));
+      color: #040914;
+      box-shadow: 0 0 15px var(--accent-glow);
+      transform: scale(1.05);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out forwards;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Video Section Styling */
+    .video-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .video-card h2 {
+      color: var(--primary-cyan);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      background: #000;
+    }
+
+    .video-wrapper iframe, .video-wrapper embed, .video-wrapper object {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      position: relative;
+      transition: transform 0.2s ease-out, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+    }
+
+    .card:hover {
+      box-shadow: 0 10px 30px -10px var(--accent-glow);
+    }
+
+    .card h3 {
+      color: var(--primary-cyan);
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card .date {
+      font-size: 0.85rem;
+      color: var(--secondary-blue);
+      font-weight: bold;
+    }
+
+    .card .location {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .card ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .card ul li {
+      position: relative;
+      padding-left: 1.2rem;
+      margin-bottom: 0.6rem;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .card ul li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--primary-cyan);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      background: rgba(0, 242, 254, 0.1);
+      border: 1px solid var(--border-color);
+      color: var(--primary-cyan);
+      padding: 0.3rem 0.7rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+    }
+
+    .skills-category {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .skills-category h3 {
+      color: var(--primary-cyan);
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    .pill-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .pill {
+      background: linear-gradient(135deg, rgba(79, 172, 254, 0.2), rgba(0, 242, 254, 0.2));
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .pill:hover {
+      background: var(--primary-cyan);
+      color: #000;
+      box-shadow: 0 0 10px var(--primary-cyan);
+      transform: translateY(-3px);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="canvas-container"></div>
+
+  <div class="app-container">
+    <header>
+      <h1>Yahya EL MORHDER</h1>
+      <p class="subtitle">Computer Science Student @ ENSEEIHT</p>
+      
+      <div class="contact-info">
+        <span><i class="fas fa-phone"></i> +33 759-438559</span>
+        <span><i class="fas fa-envelope"></i> yahyaelmorhder1@gmail.com</span>
+        <a href="https://linkedin.com/in/yahya-el-morhder-108989390/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="https://github.com/YXХНҮХ" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+
+      <!-- CV Links Container -->
+      <div class="cv-action-container">
+        <a href="https://github.com/yer1420/portfolio/blob/main/CV.pdf" download class="btn-cv">
+          <i class="fas fa-file-pdf"></i> Resume (English)
+        </a>
+        <a href="https://github.com/yer1420/portfolio/blob/main/CV_FR.pdf" download class="btn-cv">
+          <i class="fas fa-file-pdf"></i> CV (Français)
+        </a>
+      </div>
+    </header>
+
+    <nav>
+      <button class="nav-btn active" onclick="openTab('pitch')"><i class="fas fa-video"></i> Pitch Video</button>
+      <button class="nav-btn" onclick="openTab('projects')"><i class="fas fa-code"></i> Projects</button>
+      <button class="nav-btn" onclick="openTab('experience')"><i class="fas fa-briefcase"></i> Experience</button>
+      <button class="nav-btn" onclick="openTab('education')"><i class="fas fa-graduation-cap"></i> Education</button>
+      <button class="nav-btn" onclick="openTab('skills')"><i class="fas fa-cogs"></i> Technical Skills</button>
+    </nav>
+
+    <!-- Pitch Video Tab -->
+    <div id="pitch" class="tab-content active">
+      <div class="video-card">
+        <h2><i class="fas fa-play-circle"></i> Elevator Pitch Video</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">
+          2-Minute Unique Value Proposal &amp; International Mobility Strategy.
+        </p>
+        <a href="https://www.youtube.com/shorts/gkDgvd6lKBY" target="_blank" class="action-btn pitch-btn">
+		  <i class="fas fa-play-circle"></i> Watch Pitch Video on YouTube
+		</a>
+      </div>
+    </div>
+
+    <!-- Projects Section -->
+    <div id="projects" class="tab-content">
+      <div class="grid-container">
+        <div class="card tilt-card">
+          <h3>Simath</h3>
+          <div class="date">June 2023 - Present</div>
+          <ul>
+            <li>Terminal application rendering 3D and 2D graphics inside the Windows console.</li>
+            <li>Implemented and demonstrated complex physical and mathematical models.</li>
+            <li>High-performance C++ execution routines with OpenAL audio integration.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">C++</span><span class="tag">Win32</span><span class="tag">ffmpeg</span><span class="tag">OpenAL</span><span class="tag">Docker</span>
+          </div>
+        </div>
+
+        <div class="card tilt-card">
+          <h3>Model Compressor</h3>
+          <div class="date">Sep 2025 - Aug 2026</div>
+          <ul>
+            <li>3D object model lossy compression utilizing spherical harmonics decomposition.</li>
+            <li>Designed CLI workflow and terminal interface for seamless system integration.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">NumPy</span><span class="tag">VisPy</span><span class="tag">Matplotlib</span><span class="tag">Git</span>
+          </div>
+        </div>
+
+        <div class="card tilt-card">
+          <h3>ESP32 Irrigation System</h3>
+          <div class="date">March 2026 - Present</div>
+          <ul>
+            <li>Embedded web application hosted on an ESP32-S3 microcontroller for automated irrigation.</li>
+            <li>Integrated WebSockets for concurrent user interactions and live telemetry monitoring.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">C</span><span class="tag">Espressif</span><span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">CMake</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Experience Section -->
+    <div id="experience" class="tab-content">
+      <div class="grid-container">
+        <div class="card tilt-card">
+          <h3>Freelance / Independent Client Work</h3>
+          <div class="date">August 2022 - 2024</div>
+          <ul>
+            <li>Managed direct client communications and coordinated key software deliverables.</li>
+            <li>Handled digital asset organization, multimedia pipelines, and multi-platform problem-solving.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education Section -->
+    <div id="education" class="tab-content">
+      <div class="grid-container">
+        <div class="card tilt-card">
+          <h3>ENSEEIHT</h3>
+          <div class="location">Toulouse, France</div>
+          <div class="date">Aug 2025 - Present</div>
+          <p style="color: var(--text-muted); margin-top: 0.5rem;">Degree Program: <strong>Sciences du Numérique (Computer Science &amp; Telecom)</strong></p>
+        </div>
+
+        <div class="card tilt-card">
+          <h3>Lycée Al Zahraoui</h3>
+          <div class="location">Rabat, Morocco</div>
+          <div class="date">Sep 2024 - June 2025</div>
+          <p style="color: var(--text-muted); margin-top: 0.5rem;"><strong>Preparatory Classes (CPGE)</strong></p>
+        </div>
+
+        <div class="card tilt-card">
+          <h3>Lycée Qualifiant</h3>
+          <div class="location">El Jadida, Morocco</div>
+          <div class="date">Prior Studies</div>
+          <p style="color: var(--text-muted); margin-top: 0.5rem;">Secondary Scientific Education</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills Section -->
+    <div id="skills" class="tab-content">
+      <div class="skills-category">
+        <h3><i class="fas fa-code"></i> Languages</h3>
+        <div class="pill-container">
+          <span class="pill">C/C++</span><span class="pill">Python</span><span class="pill">Java</span>
+          <span class="pill">JavaScript</span><span class="pill">C#</span><span class="pill">SQL (Postgres)</span><span class="pill">Ruby</span>
+        </div>
+      </div>
+
+      <div class="skills-category">
+        <h3><i class="fas fa-cubes"></i> Frameworks &amp; APIs</h3>
+        <div class="pill-container">
+          <span class="pill">React</span><span class="pill">Node.js</span><span class="pill">JUnit</span>
+          <span class="pill">Qt</span><span class="pill">Dear ImGui</span><span class="pill">Espressif</span>
+        </div>
+      </div>
+
+      <div class="skills-category">
+        <h3><i class="fas fa-tools"></i> Developer Tools</h3>
+        <div class="pill-container">
+          <span class="pill">Git</span><span class="pill">Docker</span><span class="pill">Google Cloud Platform</span>
+          <span class="pill">VS Code</span><span class="pill">Visual Studio</span><span class="pill">PyCharm</span><span class="pill">Eclipse</span>
+        </div>
+      </div>
+
+      <div class="skills-category">
+        <h3><i class="fas fa-book"></i> Libraries &amp; Graphics</h3>
+        <div class="pill-container">
+          <span class="pill">pandas</span><span class="pill">NumPy</span><span class="pill">Matplotlib</span>
+          <span class="pill">TensorFlow</span><span class="pill">OpenGL</span><span class="pill">Vulkan</span>
+          <span class="pill">SFML</span><span class="pill">OpenCV</span>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 Yahya EL MORHDER. Built with Three.js &amp; Modern Web Technologies.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Tab Switcher
+    function openTab(tabId) {
+      const contents = document.querySelectorAll('.tab-content');
+      const buttons = document.querySelectorAll('.nav-btn');
+
+      contents.forEach(content => content.classList.remove('active'));
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById(tabId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+
+    // 3D Card Hover Effect (Tilt)
+    document.querySelectorAll('.tilt-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        card.style.transform = `perspective(1000px) rotateX(${-y / 12}deg) rotateY(${x / 12}deg) translateZ(10px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+      });
+    });
+
+    // Three.js Background
+    const container = document.getElementById('canvas-container');
+    const scene = new THREE.Scene();
+    
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 30;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
+
+    // Particles
+    const particlesCount = 700;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particlesCount * 3);
+    const colors = new Float32Array(particlesCount * 3);
+
+    const cyanColor = new THREE.Color(0x00f2fe);
+    const blueColor = new THREE.Color(0x4facfe);
+
+    for (let i = 0; i < particlesCount * 3; i += 3) {
+      positions[i] = (Math.random() - 0.5) * 80;
+      positions[i + 1] = (Math.random() - 0.5) * 80;
+      positions[i + 2] = (Math.random() - 0.5) * 80;
+
+      const mixedColor = cyanColor.clone().lerp(blueColor, Math.random());
+      colors[i] = mixedColor.r;
+      colors[i + 1] = mixedColor.g;
+      colors[i + 2] = mixedColor.b;
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const material = new THREE.PointsMaterial({
+      size: 0.7,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.8
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    // Torus Geometry
+    const torusGeom = new THREE.TorusKnotGeometry(8, 2.5, 100, 16);
+    const torusMat = new THREE.MeshBasicMaterial({
+      color: 0x00f2fe,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.12
+    });
+    const torusKnot = new THREE.Mesh(torusGeom, torusMat);
+    scene.add(torusKnot);
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX - window.innerWidth / 2) * 0.0005;
+      mouseY = (e.clientY - window.innerHeight / 2) * 0.0005;
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      particles.rotation.y += 0.001;
+      particles.rotation.x += 0.0005;
+
+      torusKnot.rotation.x += 0.003;
+      torusKnot.rotation.y += 0.005;
+
+      camera.position.x += (mouseX * 20 - camera.position.x) * 0.05;
+      camera.position.y += (-mouseY * 20 - camera.position.y) * 0.05;
+      camera.lookAt(scene.position);
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
